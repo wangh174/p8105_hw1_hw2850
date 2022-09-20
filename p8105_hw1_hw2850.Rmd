@@ -5,3 +5,57 @@ date: "2022-09-20"
 output: html_document
 ---
 
+```{r}
+#Problem 1
+data("penguins", package = "palmerpenguins")
+
+#View data information
+ls(penguins)
+summary(penguins)
+#There are 8 variables, namely "bill_depth_mm", "bill_length_mm", "body_mass_g", "flipper_length_mm", "island", "sex", "species", "year". The mean of bill_length_mm is 43.92. The mean of flipper_length_mm is 200.9. 
+
+nrow(penguins) #344 observations/rows
+ncol(penguins) #8 columns
+#The dataset size is 344*8
+
+penguins_new<-na.omit(penguins) #Delete NA values
+
+mean(penguins_new$flipper_length_mm) #Calculate the mean of flipper length
+
+library(ggplot2) 
+
+ggplot(penguins_new, aes(bill_length_mm, flipper_length_mm, color=species))+geom_point() #Making a scatterplot
+
+ggsave("flipper_length~bill_length_scatterplot.png", plot = last_plot()) #save plot as png format
+```
+
+```{r}
+#Problem 2
+library(tidyverse)
+
+#Create a dataframe
+df<-tibble(
+  norm_samp=rnorm(10, mean = 0, sd=1),
+  norm_samp_logical=norm_samp>0,
+  norm_samp_char=c("1","2","3","4","5","6","7","8","9","10"),
+  norm_samp_factor=factor(c("low","medium","high","low","medium","high","low","medium","high","low"))
+)
+
+#Calculate the mean of each variable
+mean(df %>% pull(norm_samp)) #Works 
+mean(df %>% pull(norm_samp_logical)) #Works
+mean(df %>% pull(norm_samp_char)) #Does not work
+mean(df %>% pull(norm_samp_factor)) #Does not work
+```
+
+```{r}
+#Apply as.numeric function
+numeric_log_var<-as.numeric(df %>% pull(norm_samp_logical))
+mean(numeric_log_var) #Works because True is converted as 1 and False is converted as 0
+
+numeric_char_var<-as.numeric(df %>% pull(norm_samp_char))
+mean(numeric_char_var) #Works because character variable is now numeric
+
+numeric_fac_var<-as.numeric(df %>% pull(norm_samp_factor))
+mean(numeric_fac_var) #Works because factor variable is now numeric
+```

@@ -48,7 +48,7 @@ mean(df %>% pull(norm_samp_char)) #Does not work
 mean(df %>% pull(norm_samp_factor)) #Does not work
 ```
 
-```{r}
+```{r, eval=FALSE}
 #Apply as.numeric function
 numeric_log_var<-as.numeric(df %>% pull(norm_samp_logical))
 mean(numeric_log_var) #Works because True is converted as 1 and False is converted as 0

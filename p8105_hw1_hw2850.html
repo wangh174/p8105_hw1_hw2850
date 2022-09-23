@@ -433,9 +433,9 @@ df&lt;-tibble(
 
 #Calculate the mean of each variable
 mean(df %&gt;% pull(norm_samp)) #Works </code></pre>
-<pre><code>## [1] 0.06060496</code></pre>
+<pre><code>## [1] 0.4719587</code></pre>
 <pre class="r"><code>mean(df %&gt;% pull(norm_samp_logical)) #Works</code></pre>
-<pre><code>## [1] 0.5</code></pre>
+<pre><code>## [1] 0.8</code></pre>
 <pre class="r"><code>mean(df %&gt;% pull(norm_samp_char)) #Does not work</code></pre>
 <pre><code>## Warning in mean.default(df %&gt;% pull(norm_samp_char)): argument is not numeric or
 ## logical: returning NA</code></pre>
@@ -446,14 +446,13 @@ mean(df %&gt;% pull(norm_samp)) #Works </code></pre>
 <pre><code>## [1] NA</code></pre>
 <pre class="r"><code>#Apply as.numeric function
 numeric_log_var&lt;-as.numeric(df %&gt;% pull(norm_samp_logical))
-mean(numeric_log_var) #Works because True is converted as 1 and False is converted as 0</code></pre>
-<pre><code>## [1] 0.5</code></pre>
-<pre class="r"><code>numeric_char_var&lt;-as.numeric(df %&gt;% pull(norm_samp_char))
-mean(numeric_char_var) #Works because character variable is now numeric</code></pre>
-<pre><code>## [1] 5.5</code></pre>
-<pre class="r"><code>numeric_fac_var&lt;-as.numeric(df %&gt;% pull(norm_samp_factor))
+mean(numeric_log_var) #Works because True is converted as 1 and False is converted as 0
+
+numeric_char_var&lt;-as.numeric(df %&gt;% pull(norm_samp_char))
+mean(numeric_char_var) #Works because character variable is now numeric
+
+numeric_fac_var&lt;-as.numeric(df %&gt;% pull(norm_samp_factor))
 mean(numeric_fac_var) #Works because factor variable is now numeric</code></pre>
-<pre><code>## [1] 2</code></pre>
 
 
 
